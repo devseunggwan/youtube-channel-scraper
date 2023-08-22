@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "youtube-channel-scraper"
+version = "0.1.0"
+description = "Youtube Channel 스크래핑을 위해 작업하는 repo입니다:)"
+authors = ["Seunggwan Song <yanhis97531@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+black = "^23.7.0"
+isort = "^5.12.0"
+flake8 = "^6.1.0"
+pre-commit = "^3.3.3"
+autoflake = "^2.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
+line_length = 88
