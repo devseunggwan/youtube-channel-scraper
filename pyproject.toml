@@ -13,6 +13,13 @@ isort = "^5.12.0"
 flake8 = "^6.1.0"
 pre-commit = "^3.3.3"
 autoflake = "^2.2.0"
+python-dotenv = "^1.0.0"
+aiohttp = "^3.8.5"
+aiofile = "^3.8.8"
+google-auth-oauthlib = "^1.0.0"
+google-api-python-client = "^2.97.0"
+google-auth-httplib2 = "^0.1.0"
+google-auth = "^2.22.0"
 
 [build-system]
 requires = ["poetry-core"]
