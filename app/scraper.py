@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Sample Python code for youtube.channels.list
-# See instructions for running these code samples locally:
-# https://developers.google.com/explorer-help/code-samples#python
-
 import os
 import json
 import asyncio
@@ -12,7 +6,7 @@ from typing import Any
 
 import aiohttp
 import aiofiles
-from dotenv import load_dotenv
+from youtube_transcript_api import YouTubeTranscriptApi
 
 
 class YtChannelPlaylistsScraper:
@@ -27,26 +21,6 @@ class YtChannelPlaylistsScraper:
         self.__api_prefix = (
             f"{self.__api_host}/{self.__api_service_name}/{self.__api_version}"
         )
-
-    async def __write_json_file(self, data: dict) -> None:
-        try:
-            __date = self.__get_date()
-            __time = self.__get_time()
-            os.makedirs(f"output/{self.__channel_id}/{__date}", exist_ok=True)
-
-            file_name = os.path.join(
-                "output",
-                self.__channel_id,
-                __date,
-                f"playlists_{self.__channel_id}_{__date}T{__time}.json",
-            )
-            async with aiofiles.open(file_name, mode="w", encoding="utf-8") as f:
-                await f.write(json.dumps(data, ensure_ascii=False, indent=4))
-        except Exception as e:
-            print(e)
-            return False
-
-        return True
 
     @staticmethod
     def __get_date() -> str:
@@ -130,12 +104,47 @@ class YtChannelPlaylistsScraper:
 
         return playlists
 
-    def __call__(self, *args: Any, **kwds: Any) -> Any:
-        self.__channel_id = kwds["channel_id"]
+    def __get_playlist_items_transcript(self, playlists):
+        for playlist in playlists:
+            for item in playlist["items"]:
+                try:
+                    item["transcript"] = YouTubeTranscriptApi.get_transcript(
+                        item["snippet"]["resourceId"]["videoId"],
+                        languages=["ko"],
+                    )
+                except Exception as e:
+                    print(e)
+                    print(f"passed: {item['snippet']['resourceId']['videoId']}")
+
+        return playlists
+
+    async def __write_json_file(self, data: dict) -> None:
+        try:
+            __date = self.__get_date()
+            __time = self.__get_time()
+            os.makedirs(f"output/{self.__channel_id}/{__date}", exist_ok=True)
+
+            file_name = os.path.join(
+                "output",
+                self.__channel_id,
+                __date,
+                f"playlists_{self.__channel_id}_{__date}T{__time}.json",
+            )
+            async with aiofiles.open(file_name, mode="w", encoding="utf-8") as f:
+                await f.write(json.dumps(data, ensure_ascii=False, indent=4))
+        except Exception as e:
+            print(e)
+            return False
+
+        return True
+
+    def run(self, channel_id: str) -> Any:
+        self.__channel_id = channel_id
 
         playlists = asyncio.run(self.get_playlists())
         playlists = asyncio.run(self.get_playlist_items(playlists))
         playlists = asyncio.run(self.get_playlist_items_statistics(playlists))
+        playlists = self.__get_playlist_items_transcript(playlists)
 
         asyncio.run(self.__write_json_file(playlists))
 
