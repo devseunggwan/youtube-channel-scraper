@@ -1,5 +1,7 @@
+# 파이썬 설치 시 의존성을 가진 라이브러리 설치
+# https://devlog.jwgo.kr/2019/06/05/must-installed-lib-when-installing-python-using-pyenv/
 sudo apt-get update
-sudo apt-get install build-essential libbz2-dev openssl
+sudo apt-get install build-essential libffi-dev libbz2-dev zlib1g-dev libreadline-dev libsqlite3-dev
 curl https://pyenv.run | bash
 
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
