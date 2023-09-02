@@ -122,6 +122,9 @@ class YtChannelPlaylistsScraper:
         try:
             __date = self.__get_date()
             __time = self.__get_time()
+
+            os.makedirs("output", exist_ok=True)
+            os.makedirs(f"output/{self.__channel_id}", exist_ok=True)
             os.makedirs(f"output/{self.__channel_id}/{__date}", exist_ok=True)
 
             file_name = os.path.join(
