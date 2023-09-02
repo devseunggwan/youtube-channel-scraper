@@ -1,12 +1,10 @@
 # youtube-channel-scraper
 
-Youtube 내 채널 별 재생목록과 동영상 정보들을 전부 가져옵니다. 
-
-Youtube API V3를 사용하여 가져오며, 사용한 API는 다음과 같습니다.
-
-* [Playlist 조회](https://developers.google.com/youtube/v3/docs/playlists/list?hl=ko)
-* [Playlist 내 동영상 조회](https://developers.google.com/youtube/v3/docs/playlistItems/list?hl=ko)
-* [동영상 조회수, 좋아요 조회](https://developers.google.com/youtube/v3/docs/videos/list?hl=ko)
+* Youtube 내 채널 별 재생목록과 동영상 정보들을 전부 가져옵니다. 
+* Youtube API V3를 사용하여 가져오며, 사용한 API는 다음과 같습니다.
+	* [Playlist 조회](https://developers.google.com/youtube/v3/docs/playlists/list?hl=ko)
+	* [Playlist 내 동영상 조회](https://developers.google.com/youtube/v3/docs/playlistItems/list?hl=ko)
+	* [동영상 조회수, 좋아요 조회](https://developers.google.com/youtube/v3/docs/videos/list?hl=ko)
 
 ## Quickstart
 
@@ -37,14 +35,14 @@ python main.py --key {YOUR-API-KEY} --channel {CHANNEL-ID}
 ```
 output
 └──{CHANNEL-ID}
-	   ├──{YYYYMMDD}
-	   │		├──playlists_{CHANNEL-ID}_{YYYYMMDDTHHMMSS}.json
-	   │		├──playlists_{CHANNEL-ID}_{YYYYMMDDTHHMMSS}.json
-	   │		└──playlists_{CHANNEL-ID}_{YYYYMMDDTHHMMSS}.json
-	   └──{YYYYMMDD}
-  		 		├──playlists_{CHANNEL-ID}_{YYYYMMDDTHHMMSS}.json
-   				├──playlists_{CHANNEL-ID}_{YYYYMMDDTHHMMSS}.json
-   				└──playlists_{CHANNEL-ID}_{YYYYMMDDTHHMMSS}.json
+	├──{YYYYMMDD}
+	│	├──playlists_{CHANNEL-ID}_{YYYYMMDDTHHMMSS}.json
+	│	├──playlists_{CHANNEL-ID}_{YYYYMMDDTHHMMSS}.json
+	│	└──playlists_{CHANNEL-ID}_{YYYYMMDDTHHMMSS}.json
+	└──{YYYYMMDD}
+		├──playlists_{CHANNEL-ID}_{YYYYMMDDTHHMMSS}.json
+		├──playlists_{CHANNEL-ID}_{YYYYMMDDTHHMMSS}.json
+		└──playlists_{CHANNEL-ID}_{YYYYMMDDTHHMMSS}.json
 ```
 
 ### Json 구조
